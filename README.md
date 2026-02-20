@@ -1,17 +1,22 @@
 # 🌆 SnapFix — AI Urban Issue Reporter
 SnapFix is an AI-powered Telegram bot that enables citizens to report urban civic issues (potholes, garbage, illegal parking, etc.) using photos and location.  
 The system classifies issues using Computer Vision + NLP and automatically routes them to the appropriate municipal departments.
-🎯 Aligned with **UN SDG 11 – Sustainable Cities and Communities**
+. 🎯 Aligned with **UN SDG 11 – Sustainable Cities and Communities**
+
 ---
+
 ## 🧠 Problem Statement
 Traditional civic complaint systems face:
 - Manual classification delays  
 - No image verification  
 - Incorrect department routing  
 - Lack of geo-analytics  
-- Slow emergency detection  
+- Slow emergency detection 
+
 SnapFix solves this using AI-based image classification, NLP-driven urgency detection, and automated routing.
+
 ---
+
 ## 🏗 System Architecture
 The system follows a 3-layer architecture:
 ### 1️⃣ Citizen Layer
@@ -52,7 +57,9 @@ This modular architecture ensures scalability and maintainability.
 - Road Sign Issues
 - Electric Pole Damage
 - Power Outages
+
 ---
+
 ### 📝 Text Urgency Detection
 - Vectorization: TF-IDF
 - NLP: spaCy v3.7
@@ -64,13 +71,17 @@ Detects emergency phrases like:
 - "danger"
 - "live wire"
 - "road blocked"
+
 ---
+
 ## ⚡ Smart Auto-Routing System
 - 85% of complaints auto-processed without manual intervention  
 - Low-confidence cases flagged for review  
 - Reduces administrative workload  
 - Improves response speed  
+
 ---
+
 ## 🗄 Tech Stack
 | Layer | Technology |
 |--------|------------|
@@ -81,14 +92,18 @@ Detects emergency phrases like:
 | Database | PostgreSQL (Spatial Indexing) |
 | Frontend | HTML Admin Dashboard |
 | Other | Geo-tagging, Heatmaps |
+
 ---
+
 ## 📊 Project Results
 - Image Classification Accuracy: **93.36%**
 - Urgency Detection F1 Score: **99.83%**
 - Auto-Routing Efficiency: **85% automated complaints**
 - Multimodal AI (Image + Text fusion)
 - Geo-aware civic analytics
+
 ---
+
 ## 🚀 Installation & Setup
 
 ### 1️⃣ Clone Repository
@@ -119,19 +134,25 @@ python app.py
 - Dashboard-based governance monitoring
 - Supports UN Sustainable Development Goal 11
 SnapFix enhances transparency, speeds up civic issue resolution, and reduces manual workload for city authorities.
+
 ---
+
 ## 🔮 Future Scope
 - Cloud deployment (AWS / GCP)
 - Mobile app integration
 - Real-time department notifications
 - Predictive maintenance using complaint heatmaps
 - Integration with smart city APIs
+
 ---
+
 ## 👨‍💻 Team
 Saharsha  
 Yashas M N  
 Samartha K B  
 Avyay Bhat  
+
 ---
+
 ## 📜 License
 This project is developed for academic and research purposes.
