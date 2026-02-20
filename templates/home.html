@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SnapFix - Issue Tracking System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.1em;
+        }
+        
+        .portals {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .portal-btn {
+            display: inline-block;
+            padding: 40px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            min-width: 250px;
+        }
+        
+        .portal-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .admin-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .dept-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .info {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            color: #555;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SnapFix</h1>
+        <p class="subtitle">Government Issue Tracking System</p>
+        
+        <div class="portals">
+            <a href="{{ url_for('admin_reports') }}" class="portal-btn admin-btn">
+                👤 Admin Portal
+            </a>
+            <a href="{{ url_for('deptlogin') }}" class="portal-btn dept-btn">
+                🏢 Department Portal
+            </a>
+        </div>
+        
+        <div class="info">
+            <p><strong>Admin Portal:</strong> View all issues, assign to departments, track progress</p>
+            <p style="margin-top: 10px;"><strong>Department Portal:</strong> Login and manage assigned issues</p>
+        </div>
+    </div>
+</body>
+</html>
