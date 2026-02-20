@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report {{ report.tracking_id }} - SnapFix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            background-color: #34495e;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: #3498db;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .info-box p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .info-box strong {
+            color: #2c3e50;
+        }
+        
+        .info-box label {
+            display: inline-block;
+            min-width: 150px;
+        }
+        
+        .form-section {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-section select,
+        .form-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+        }
+        
+        .form-section textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-section select:focus,
+        .form-section textarea:focus {
+            outline: none;
+            border-color: #2196F3;
+            box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+        }
+        
+        .form-section button {
+            margin-top: 15px;
+            padding: 10px 30px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        
+        .form-section button:hover {
+            background-color: #1976D2;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 15px;
+            background-color: #95a5a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .back-link:hover {
+            background-color: #7f8c8d;
+            text-decoration: none;
+        }
+        
+        a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .pending {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .in-progress {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .resolved {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .assigned {
+            background-color: #9c27b0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>SnapFix Department Portal - Issue Detail</h1>
+        <div class="nav-links">
+            <a href="{{ url_for('deptdashboard') }}">← Back to Dashboard</a>
+            <a href="{{ url_for('deptlogout') }}">🚪 Logout</a>
+            <a href="{{ url_for('index') }}">🏠 Home</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Report {{ report.tracking_id }}</h2>
+        
+        <div class="info-box">
+            <p><strong>Issue Type:</strong> {{ report.issueType|default('Unknown') }}</p>
+            <p><strong>Priority:</strong> {{ report.priority }}</p>
+            <p><strong>Status:</strong> 
+                <span class="status-badge {% if report.status == 'Pending' %}pending{% elif report.status == 'In Progress' %}in-progress{% else %}resolved{% endif %}">
+                    {{ report.status }}
+                </span>
+            </p>
+            <p><strong>Description:</strong> {{ report.description }}</p>
+            <p><strong>Confidence:</strong> {% if report.probability %}{{ (report.probability|float * 100)|round(1) }}%{% else %}NA{% endif %}</p>
+            <p><strong>Location:</strong> 
+                {% if report.latitude and report.longitude %}
+                    <a href="https://www.google.com/maps?q={{ report.latitude }},{{ report.longitude }}" target="_blank">View on Map</a>
+                    {{ report.latitude }}, {{ report.longitude }}
+                {% else %}
+                    {{ report.location or 'NA' }}
+                {% endif %}
+            </p>
+            <p><strong>Admin Remarks:</strong> {{ report.remarks or 'None' }}</p>
+            <p><strong>Current Department Status:</strong> 
+                <span class="status-badge {% if report.dept_status == 'Assigned' %}assigned{% elif report.dept_status == 'In Progress' %}in-progress{% elif report.dept_status == 'Resolved' %}resolved{% else %}pending{% endif %}">
+                    {{ report.dept_status or 'Not Set' }}
+                </span>
+            </p>
+        </div>
+        
+        <div class="form-section">
+            <h3>Department Update</h3>
+            <form method="post">
+                <div class="form-group">
+                    <label for="deptstatus">Department Status</label>
+                    <select id="deptstatus" name="deptstatus" required>
+                        <option value="Assigned" {% if report.dept_status == 'Assigned' %}selected{% endif %}>Assigned</option>
+                        <option value="In Progress" {% if report.dept_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                        <option value="Resolved" {% if report.dept_status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deptremarks">Department Remarks</label>
+                    <textarea id="deptremarks" name="deptremarks" placeholder="Add remarks about the progress of this issue...">{{ report.dept_remarks or '' }}</textarea>
+                </div>
+                
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+        
+        <a href="{{ url_for('deptdashboard') }}" class="back-link">← Back to Dashboard</a>
+    </div>
+</body>
+</html>

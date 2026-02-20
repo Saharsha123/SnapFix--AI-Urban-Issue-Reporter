@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Dashboard - SnapFix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            background-color: #34495e;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: #3498db;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0;
+            background: white;
+            padding: 30px;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .stats p {
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        
+        .stats strong {
+            font-size: 1.3em;
+            color: #2ecc71;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table th {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        table tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .pending {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .in-progress {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .resolved {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .assigned {
+            background-color: #9c27b0;
+            color: white;
+        }
+        
+        .action-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>SnapFix Department Portal - {{ department }}</h1>
+        <div class="nav-links">
+            <a href="{{ url_for('deptlogout') }}">🚪 Logout</a>
+            <a href="{{ url_for('index') }}">🏠 Home</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>{{ department }} - Assigned Issues</h2>
+        
+        <div class="stats">
+            <p>Total Issues Assigned: <strong>{{ reports|length }}</strong></p>
+        </div>
+        
+        {% if reports %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tracking ID</th>
+                        <th>Issue Type</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Department Status</th>
+                        <th>Submitted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reports %}
+                        <tr>
+                            <td>
+                                {% if r.tracking_id %}
+                                    <a href="{{ url_for('deptreportdetail', tracking_id=r.tracking_id) }}">{{ r.tracking_id }}</a>
+                                {% else %}
+                                    no ID
+                                {% endif %}
+                            </td>
+                            <td>{{ r.issuetype }}</td>
+                            <td>{{ r.priority }}</td>
+                            <td>
+                                <span class="status-badge {% if r.status == 'Pending' %}pending{% elif r.status == 'In Progress' %}in-progress{% else %}resolved{% endif %}">
+                                    {{ r.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge {% if r.dept_status == 'Assigned' %}assigned{% elif r.dept_status == 'In Progress' %}in-progress{% elif r.dept_status == 'Resolved' %}resolved{% else %}pending{% endif %}">
+                                    {{ r.dept_status or 'Not Set' }}
+                                </span>
+                            </td>
+                            <td>{{ r.timestamp }}</td>
+                            <td>
+                                {% if r.tracking_id %}
+                                    <a href="{{ url_for('deptreportdetail', tracking_id=r.tracking_id) }}" class="action-btn">Update</a>
+                                {% else %}
+                                    no ID
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="no-data">
+                <p>No issues assigned to this department yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

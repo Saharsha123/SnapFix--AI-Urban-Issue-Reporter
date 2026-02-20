@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Login - SnapFix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .error {
+            background-color: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c33;
+        }
+        
+        .demo-credentials {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 25px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .demo-credentials h3 {
+            color: #1976D2;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .demo-credentials p {
+            color: #555;
+            font-size: 0.9em;
+            margin: 5px 0;
+            font-family: monospace;
+        }
+        
+        .home-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .home-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .home-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>🏢 Department Portal</h1>
+        <p class="subtitle">Login to track and update issue progress</p>
+        
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+            
+            <button type="submit">🔐 Login</button>
+        </form>
+        
+        <div class="demo-credentials">
+            <h3>📋 Demo Credentials</h3>
+            <p><strong>PWD Department:</strong></p>
+            <p>pwd_admin / pwd123</p>
+            <p style="margin-top: 10px;"><strong>SWM Department:</strong></p>
+            <p>swm_admin / swm123</p>
+            <p style="margin-top: 10px;"><strong>Forest Department:</strong></p>
+            <p>forest_admin / forest123</p>
+            <p style="margin-top: 10px;"><strong>BESCOM:</strong></p>
+            <p>bescom_admin / bescom123</p>
+        </div>
+        
+        <div class="home-link">
+            <a href="{{ url_for('index') }}">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
