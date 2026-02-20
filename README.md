@@ -30,7 +30,7 @@ Citizen → Telegram Bot → Flask API → AI Models → PostgreSQL → Dashboar
 | Database  | PostgreSQL (spatial indexes)      |
 | Frontend  | HTML dashboard                    |
 | Other     | Geo-tagging, heatmaps             |
-All trained on 3,000+ civic images and 3,000+ complaint texts.
+* All trained on 3,000+ civic images and 3,000+ complaint texts.
 
 ## Project Results
 * __Image Accuracy:__ 93.36% on test set.
