@@ -1,7 +1,7 @@
 # 🌆 SnapFix — AI Urban Issue Reporter
 SnapFix is an AI-powered Telegram bot that enables citizens to report urban civic issues (potholes, garbage, illegal parking, etc.) using photos and location.  
 The system classifies issues using Computer Vision + NLP and automatically routes them to the appropriate municipal departments.
-. 🎯 Aligned with **UN SDG 11 – Sustainable Cities and Communities**
+* 🎯 Aligned with **UN SDG 11 – Sustainable Cities and Communities**
 
 ---
 
